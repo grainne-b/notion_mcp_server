@@ -20,6 +20,8 @@ def create_page(page_name: str):
         logger.error(f"Error creating page {page_name}: {e}")
 
 
+# Can use this function to get the page ids of the children
+# As it will return the page objects, which includes content and child pages
 def get_page_contents(page_id: str):
     logger.info(f"Getting children of page {page_id}")
     try:
@@ -38,8 +40,35 @@ def get_specific_page_details(page_id: str):
     except Exception as e:
         logger.error(f"Error getting contents of page {page_id}: {e}")
 
+def add_content_to_page(page_id: str, content: str):
+    logger.info(f"Adding content to page {page_id}")
+    try:
+        notion_client.blocks.children.append(
+    block_id=page_id,
+    children=[
+        {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {
+                "rich_text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": content
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+)
+        logger.info(f"Content added to page {page_id} successfully")
+    except Exception as e:
+        logger.error(f"Error adding content to page {page_id}: {e}")
 
 # Actual usage
 # create_page("notion sdk page test!")
-get_page_children(PARENT_PAGE_ID)
-# get_specific_page_contents(CHILD_PAGE_ID)
+# get_page_contents(PARENT_PAGE_ID)
+# get_specific_page_details(CHILD_PAGE_ID)
+
+add_content_to_page(CHILD_PAGE_ID, "Adding content from my python script!")
