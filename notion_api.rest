@@ -1,0 +1,33 @@
+
+
+@NOTION_API_KEY=REPLACE_ME
+@PARENT_PAGE_ID=1d21f7216bdb80789f88fccd964b5031
+POST https://api.notion.com/v1/pages
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+Content-Type: application/json
+Authorization: Bearer {{NOTION_API_KEY}}
+Notion-Version: 2021-05-13
+
+{
+  "parent": { "type": "page_id", "page_id": "{{PARENT_PAGE_ID}}" },
+  "properties": {
+    "Name": {
+      "title": [
+        {
+          "text": {
+            "content": "Rest Client"
+          }
+        }
+      ]
+    }
+  }
+}
+
+### List Pages in Parent Page
+
+GET https://api.notion.com/v1/blocks/{{PARENT_PAGE_ID}}/children
+
+User-Agent: rest-client
+Authorization: Bearer {{NOTION_API_KEY}}
+Notion-Version: 2021-05-13
