@@ -39,6 +39,27 @@ uv run mcp dev server.py
 uv run mcp install server.py
 ```
 
+Will add to `claude_desktop_config.json`
+
+```
+{
+  "mcpServers": {
+    "Notion MCP Server": {
+      "command": "uv",
+      "args": [
+        "run",
+        "mcp",
+        "run",
+        "/Users/UBHREGR/Documents/repos/experiments/notion_mcp_server/server.py"
+      ],
+      "env": {
+        "NOTION_API_KEY": "REPLACE_ME"
+      }
+    }
+  }
+}
+```
+
 
 ## Notion package
 ```
