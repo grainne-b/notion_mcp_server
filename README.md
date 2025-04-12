@@ -38,3 +38,23 @@ uv run mcp dev server.py
 ```
 uv run mcp install server.py
 ```
+
+
+## Notion package
+```
+notion-client
+```
+
+## Prompt to LLM to create docstrings
+```
+I am building an MCP (Model Context Protocol) server in Python.
+The functions I provide will be registered as tools using @mcp.tool() from FastMCP.
+
+Please generate a concise and informative docstring for each function I give you, following this structure:
+	•	A one-line summary describing the function’s purpose.
+	•	A section called Args: listing each argument with its type and purpose.
+	•	A section called Returns: describing the return value and its type.
+
+The docstring should help both humans and LLMs understand how and when to use the tool.
+
+```
