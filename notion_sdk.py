@@ -17,7 +17,7 @@ def create_page(page_name: str):
         page_name (str): The name of the page to be created.
 
     Returns:
-        None
+        True if the page was created successfully, False otherwise. 
     """
     logger.info(f"Creating page {page_name}")
     try:
@@ -26,8 +26,10 @@ def create_page(page_name: str):
             properties={"title": [{"text": {"content": page_name}}]},
         )
         logger.info(f"Page {page_name} created successfully")
+        return True
     except Exception as e:
         logger.error(f"Error creating page {page_name}: {e}")
+        return False
 
 def get_page_contents(page_id: str):
     """
