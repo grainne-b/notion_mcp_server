@@ -61,6 +61,24 @@ Will add to `claude_desktop_config.json`
 ```
 
 
+```
+{
+  "mcpServers": {
+    "Notion MCP Server": {
+"command": "bash",
+"args": [
+  "-c",
+  "source /Users/UBHREGR/Documents/repos/experiments/notion_mcp_server/.venv/bin/activate && uv run mcp run /Users/UBHREGR/Documents/repos/experiments/notion_mcp_server/server.py"
+      ],
+      "env": {
+        "NOTION_API_KEY": "TODO"
+      }
+    }
+  }
+}
+```
+
+
 ## Notion package
 ```
 notion-client

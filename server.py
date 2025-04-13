@@ -1,10 +1,17 @@
 # server.py
 import os
+import sys
 from loguru import logger
 from notion_sdk import create_page, get_page_contents, get_specific_page_details, add_content_to_page
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.prompts import base
+
+
+logger.remove()
+# Add a new logger configuration that outputs to stderr
+logger.add(sys.stderr, format="{time} {level} {message}", level="INFO")
+
 
 # Create an MCP server
 mcp = FastMCP("Notion MCP Server")

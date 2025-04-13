@@ -1,5 +1,5 @@
 import os
-
+import sys
 from loguru import logger
 from notion_client import Client
 
@@ -9,6 +9,12 @@ NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 notion_client = Client(auth=os.getenv("NOTION_API_KEY"))
 
 
+logger.remove()
+   # Add a new logger configuration that outputs to stderr
+logger.add(sys.stderr, format="{time} {level} {message}", level="INFO")
+
+
+# TODO ensure the page_id can be parsed
 def create_page(page_name: str):
     """
     Create a new page with the specified name in the Notion workspace.
@@ -18,15 +24,16 @@ def create_page(page_name: str):
 
     Returns:
         True if the page was created successfully, False otherwise. 
+        The created page is returned if successful. the page id can be found here.
     """
     logger.info(f"Creating page {page_name}")
     try:
-        notion_client.pages.create(
+        created_page = notion_client.pages.create(
             parent={"page_id": PARENT_PAGE_ID},
             properties={"title": [{"text": {"content": page_name}}]},
         )
         logger.info(f"Page {page_name} created successfully")
-        return True
+        return created_page
     except Exception as e:
         logger.error(f"Error creating page {page_name}: {e}")
         return False
@@ -69,6 +76,9 @@ def get_specific_page_details(page_id: str):
     except Exception as e:
         logger.error(f"Error getting contents of page {page_id}: {e}")
 
+# TODO add notes on API limits
+# There is a limit of 100 block children that can be appended by a single API request. Arrays of block children longer than 100 will result in an error.
+# https://developers.notion.com/reference/patch-block-children
 def add_content_to_page(page_id: str, content: str):
     """
     Add specified content to a page in the Notion workspace.
