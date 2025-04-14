@@ -3,7 +3,9 @@ import sys
 from loguru import logger
 from notion_client import Client
 
+# REPLACE WITH YOUR OWN PARENT PAGE ID
 PARENT_PAGE_ID = "1d21f7216bdb80789f88fccd964b5031"
+# For testing only
 CHILD_PAGE_ID = "1d31f7216bdb81749d50fdee06270fca"
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 notion_client = Client(auth=os.getenv("NOTION_API_KEY"))
